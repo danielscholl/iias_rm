@@ -78,7 +78,7 @@ Using the Azure Portal Create a new Virtual Network with the following settings
 
 Using Windows PowerShell IDE create a Resource Group and Storage Accuont
 
-> Execute: _create-azure-rg-storage.ps1_
+> Execute: __create-azure-rg-storage.ps1__
 
 - __Name:__ OpsVMRmRG  
 - __Storage:__ opsvmstorage  
@@ -108,7 +108,7 @@ Using the Azure Portal create a Virtual Server
 
 Using Windows PowerShell IDE create a Virtual Server
 
-> Execute: _create-azure-vm-web.ps1_
+> Execute: __create-azure-vm-web.ps1__
 
 - __Type:__ Windows Server 2012 R2 DataCenter  
 - __Name:__ WebVM-2  
@@ -123,7 +123,7 @@ Using Windows PowerShell IDE create a Virtual Server
 
 Using Windows PowerShell IDE create a Virtual Server
 
-> Execute: _create-azure-vm-sql.ps1_
+> Execute: __create-azure-vm-sql.ps1__
 
 - __Type:__ Windows Server 2012 R2 DataCenter  
 - __Name:__ SQLVM-2  
