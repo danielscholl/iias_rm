@@ -119,9 +119,21 @@ Using Windows PowerShell IDE create a Virtual Server
 - __Size:__ DS1 Standard 
 
 
+#### Configure WebVM-1 and WebVM-2
+
+Using Azure Portal configure WebVM's with PowerShell DSC Extension
+
+- __Configuration MOdules or Script:__ WebConfig.zip
+- __Module-qualified Name of Configuration:__ web-dsc-config.ps1\Main
+- __WMF Version:__ 2.0
+
+> This will install IIS, ASP.NET and IIS Management with a Hello World Index.html page.
+
+
+
 #### Create SQLVM-1
 
-Using Windows PowerShell IDE create a Virtual Server
+<!--Using Windows PowerShell IDE create a Virtual Server
 
 > Execute: __create-azure-vm-sql.ps1__
 
@@ -131,4 +143,4 @@ Using Windows PowerShell IDE create a Virtual Server
 - __Password:__ <your_password>  
 - __Resource Group:__ OpsVMRmRG  
 - __Location:__ South Central US  
-- __Size:__ DS1 Standard 
+- __Size:__ DS1 Standard -->
