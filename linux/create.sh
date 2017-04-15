@@ -7,8 +7,9 @@ LOCATION=centralus
 AV=WebAVSet
 NSG=AppsNSG
 VNET=WebVNET
+ADDRESS_RANGE=10.10.0.0/16
 SUBNET=Apps
-ADDRESS=10.10.0.0/24
+SUBNET_RANGE=10.10.0.0/24
 LB=WebLB
 PROBE=WebLB-Probe
 IMG=UbuntuLTS
@@ -43,20 +44,22 @@ az group create -n ${RESOURCE_GROUP} \
 
 tput setaf 6; echo 'NETWORK SETUP: ' ${VNET}; tput sgr0	
 az network vnet create -g ${RESOURCE_GROUP} -n ${VNET} \
-	--address-prefix ${ADDRESS}	\
-	--subnet-name ${SUBNET}
+	--address-prefix ${ADDRESS_RANGE}	\
+	--subnet-name ${SUBNET} \
+	--subnet-prefix ${SUBNET_RANGE}
 tput setaf 3; echo 'CREATE: *** PUBLIC IP ***'; tput sgr0	
 az network public-ip create -g ${RESOURCE_GROUP} -n ${IP}
 
 
 # OPTIONAL -->  Secondary SUBNET
-# SUBNET2=Data
-# ADDRESS2=10.10.1.0/24
-# tput setaf 4; echo 'CREATE:  *** Data SubNet ***' ${VNET}; tput sgr0
-# az network vnet subnet create -g ${RESOURCE_GROUP} -n ${SUBNET2} \
-# 	--vnet-name ${VNET} \
-# 	--address-prefix ${ADDRESS2} \
-# 	--network-security-group ${NSG}
+SUBNET2=Data
+SUBNET2_RANGE=10.10.1.0/24
+
+tput setaf 4; echo 'CREATE:  *** Data SubNet ***' ${VNET}; tput sgr0
+az network vnet subnet create -g ${RESOURCE_GROUP} -n ${SUBNET2} \
+	--vnet-name ${VNET} \
+	--address-prefix ${SUBNET2_RANGE} \
+	--network-security-group ${NSG}
 
 ################################################################################
 
@@ -67,19 +70,20 @@ az network public-ip create -g ${RESOURCE_GROUP} -n ${IP}
 #### LOAD BALANCER SETUP #####
 ##############################
 
-tput setaf 6; echo 'LOAD BALANCER SETUP: ' ${NSG}; tput sgr0
-az network public-ip create -g ${RESOURCE_GROUP} -n ${LB}-VIP
-az network lb create -g ${RESOURCE_GROUP} -n ${LB} \
-	--location ${LOCATION} \
-	--public-ip-address ${LB}-VIP --frontend-ip-name ${LB}-FE
-tput setaf 3; echo 'CREATE: *** HEALTH PROBE ***'; tput sgr0	
-az network lb probe create -g ${RESOURCE_GROUP} -n ${PROBE} \
-	--lb-name ${LB} \
-	--protocol http \
-	--port 80 \
-	--path / \
-	--interval 15 \
-	--threshold 4
+
+#tput setaf 6; echo 'LOAD BALANCER SETUP: ' ${NSG}; tput sgr0
+#az network public-ip create -g ${RESOURCE_GROUP} -n ${LB}-VIP
+#az network lb create -g ${RESOURCE_GROUP} -n ${LB} \
+#	--location ${LOCATION} \
+#	--public-ip-address ${LB}-VIP --frontend-ip-name ${LB}-FE
+#tput setaf 3; echo 'CREATE: *** HEALTH PROBE ***'; tput sgr0	
+#az network lb probe create -g ${RESOURCE_GROUP} -n ${PROBE} \
+#	--lb-name ${LB} \
+#	--protocol http \
+#	--port 80 \
+#	--path / \
+#	--interval 15 \
+#	--threshold 4
 
 ################################################################################
 
